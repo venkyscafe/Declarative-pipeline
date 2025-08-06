@@ -1,30 +1,16 @@
 pipeline {
     agent any
-    environment {
-        WORDS = "I AM HUMAN"
-        SWORDS = "I-AM-HUMAN"
-    }
     stages {
         stage ("WORDS") {
             steps {
                 echo "WORDS"
-                script {
-                    def words = env.WORDS.split(' ')
-                    for (word in words) {
-                        echo word
-                    }
-                }
+                git branch: 'main', url:'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("SWORDS") {
             steps {
                 echo "SWORDS"
-                script {
-                    def swords = env.SWORDS.split('-')
-                    for (sword in swords) {
-                        echo sword
-                    }
-                }
+                git branch: 'main', url:'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
     }
