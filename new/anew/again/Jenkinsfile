@@ -11,6 +11,9 @@ pipeline {
         cron ('0 3 * * 1-5')
     }
     stages {
+        stage ("SCM") {
+            git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+        }
         stage ("checkout from main branch") {
             when {
                 expression {
@@ -19,7 +22,7 @@ pipeline {
             }
             steps {
                 echo "This is main branch"
-                git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("checkout from release branch"){
@@ -30,7 +33,7 @@ pipeline {
             }
             steps {
                 echo "This is release branch"
-                git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
     }
