@@ -19,12 +19,12 @@ pipeline {
         stage ("checkout from main branch") {
             when {
                 expression {
-                    return params.branch == "main"
+                    return paramss.branch == "main"
                 }
             }
             steps {
                 echo "This is main branch"
-                //git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("checkout from release branch"){
@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 echo "This is release branch"
-                //git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
     }

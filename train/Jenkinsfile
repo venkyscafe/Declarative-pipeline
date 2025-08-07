@@ -1,0 +1,60 @@
+pipeline {
+
+    agent any
+
+    environment {
+        WORDS = "I AM HUMAN"
+        SWORDS = "I-AM-HUMAN"
+    }
+
+    triggers {
+        cron ('0 3 * * 1-5')
+    }
+
+    parameters {
+        string ( name:'branch', defaultValue: 'main', description: 'some info')
+    }
+    
+    stages {
+        // stage ("SCM") {
+        //     steps {
+        //         echo "SCM"
+        //         git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+        //     }
+        // }
+
+        stage ("WORDS") {
+            when {
+                expression {
+                    return params.branch == "main"
+                }
+            }
+            steps {
+                echo "WORDS"
+                script {
+                    def words = env.WORDS.split(' ')
+                    for (word in words) {
+                        echo word
+                    }
+                }
+            }
+        }
+
+        stage ("SWORDS") {
+            when {
+                expression {
+                    return params.branch = "release"
+                }
+            }
+            steps {
+                echo "SWORDS"
+                script {
+                    def swords = env.SWORDS.split('-')
+                    for (sword in swords) {
+                        echo sword
+                    }
+                }
+            }
+        }
+    }
+}
