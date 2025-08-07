@@ -13,29 +13,29 @@ pipeline {
     stages {
         stage ("SCM") {
             steps {
-                 git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                 git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("checkout from main branch") {
             when {
                 expression {
-                    return param.branch == "main"
+                    return params.branch == "main"
                 }
             }
             steps {
                 echo "This is main branch"
-                //git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("checkout from release branch"){
             when {
                 expression {
-                    return param.branch == "release"
+                    return params.branch == "release"
                 }
             }
             steps {
                 echo "This is release branch"
-                //git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                //git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
     }
