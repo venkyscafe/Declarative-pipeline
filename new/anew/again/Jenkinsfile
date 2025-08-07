@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    parameters {
+        string ( name: 'branch', defaultValue: 'main', description: 'some info')
+    }
+    environment {
+        WORDS = "I AM HUMAN"
+        SWORDS = "I-AM-HUMAN"
+    }
+    trigger {
+        cron ('0 3 ** 1-5')
+    }
+    stages {
+        stage ("checkout from main branch") {
+            when {
+                expression {
+                    return param.branch == "main"
+                }
+            }
+            steps {
+                echo "This is main branch"
+                git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+            }
+        }
+        stage ("checkout from release branch"){
+            when {
+                expression {
+                    return param.branch == "release"
+                }
+            }
+            steps {
+                echo "This is release branch"
+                git branch: "${param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+            }
+        }
+    }
+}
