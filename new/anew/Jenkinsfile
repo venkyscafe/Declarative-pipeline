@@ -7,9 +7,9 @@ pipeline {
     //     SWORDS = "I-AM-HUMAN"
     // }
 
-    triggers {
-        cron ('0 3 * * 1-7')
-    }
+    // triggers {
+    //     cron ('0 3 * * 1-7')
+    // }
 
     parameters {
         string ( name: 'branch', defaultValue: 'main', description: 'some info' )
@@ -18,7 +18,7 @@ pipeline {
     stages {
         stage ("SCM") {
             steps {
-                git branch: '${param.branch}',url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+                git branch: "${param.branch}",url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
             }
         }
         stage ("WORDS on main") {
