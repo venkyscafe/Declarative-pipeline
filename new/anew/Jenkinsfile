@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        WORDS = "I AM HUMAN"
+        SWORDS = "I-AM-HUMAN"
+    }
+
+    triggers {
+        cron ('0 3 * * 1-5')
+    }
+
+    stages {
+        stage ("WORDS") {
+            steps {
+                echo "WORDS"
+                script {
+                    def words = env.WORDS.split(' ')
+                    for (word in words) {
+                        echo word
+                    }
+                }
+            }
+        }
+        stage ("SWORDS") {
+            steps {
+                echo "SWORDS"
+                script {
+                    def swords = env.SWORDS.split('-')
+                    for (sword in swords) {
+                        echo sword
+                    }
+                }
+            }
+        }
+    }
+}
