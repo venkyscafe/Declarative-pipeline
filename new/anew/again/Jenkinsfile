@@ -7,7 +7,7 @@ pipeline {
         WORDS = "I AM HUMAN"
         SWORDS = "I-AM-HUMAN"
     }
-    trigger {
+    triggers {
         cron ('0 3 ** 1-5')
     }
     stages {
