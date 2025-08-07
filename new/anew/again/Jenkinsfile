@@ -12,7 +12,9 @@ pipeline {
     }
     stages {
         stage ("SCM") {
-            git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+            steps {
+                 git branch: "{$param.branch}", url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+            }
         }
         stage ("checkout from main branch") {
             when {
