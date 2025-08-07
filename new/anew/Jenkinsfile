@@ -6,16 +6,16 @@ pipeline {
     //     SWORDS = "I-AM-HUMAN"
     // }
 
-    // triggers {
-    //     cron ('0 3 * * 1-5')
-    // }
+    triggers {
+        cron ('0 3 * * 1-5')
+    }
 
     stages {
-        stage ("SCM") {
-            steps {
-                git branch: 'main',url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
-            }
-        }
+        // stage ("SCM") {
+        //     steps {
+        //         git branch: 'main',url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+        //     }
+        // }
         stage ("WORDS") {
             steps {
                 echo "WORDS"
