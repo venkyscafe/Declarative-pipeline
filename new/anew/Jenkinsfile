@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     // environment {
@@ -7,18 +8,27 @@ pipeline {
     // }
 
     triggers {
-        cron ('0 3 * * 1-5')
+        cron ('0 3 * * 1-7')
+    }
+
+    parameters {
+        string ( name: 'branch', defaultValue: 'main', description: 'some info' )
     }
 
     stages {
-        // stage ("SCM") {
-        //     steps {
-        //         git branch: 'main',url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
-        //     }
-        // }
-        stage ("WORDS") {
+        stage ("SCM") {
             steps {
-                echo "WORDS"
+                git branch: '${param.branch}',url: 'https://github.com/venkyscafe/Declarative-pipeline.git'
+            }
+        }
+        stage ("WORDS on main") {
+            when {
+                expression {
+                    return param.branch == "main"
+                }
+            }
+            steps {
+                echo "WORDS are main"
                 // script {
                 //     def words = env.WORDS.split(' ')
                 //     for (word in words) {
@@ -27,9 +37,14 @@ pipeline {
                 // }
             }
         }
-        stage ("SWORDS") {
+        stage ("SWORDS on release") {
+            when {
+                expression {
+                    return param.branch == "release"
+                }
+            }
             steps {
-                echo "SWORDS"
+                echo "SWORDS on release"
                 // script {
                 //     def swords = env.SWORDS.split('-')
                 //     for (sword in swords) {
